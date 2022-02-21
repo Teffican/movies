@@ -2,6 +2,7 @@ import { Component } from 'react'
 import logo from '../images/logo.svg'
 import '../styles/header.scss'
 import github from '../images/github-icon.svg'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   render() {
@@ -9,9 +10,9 @@ class Header extends Component {
         <div className="header">
             <div className="container">
                 <div className="header__inner">
-                    <a className='header__logo-link' href="#">
+                    <Link className='header__logo-link' to='/'>
                         <img className="header__logo-img" src={logo} alt="logo" />
-                    </a>
+                    </Link>
                     <a 
                     className="header__github link-regular" 
                     rel='noreferrer' 

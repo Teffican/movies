@@ -10,7 +10,7 @@ class CardList extends Component {
                     All (123)
                 </h3>
                 {new Array(8).fill(0).map((card, index) => (
-                    <CardItem key={index} {...card}/>
+                    <CardItem key={index} id={index} {...card}/>
                 ))}
 
             </div>

@@ -39,6 +39,36 @@ a {
     }
 }
 
+.grade{
+    color: #FFAD49;
+    border-radius: 8px;
+    padding: 8px;
+    padding-left: 28px;
+    background-color: rgba(0, 0, 0, 0.65);
+    width: max-content;
+    &::before{
+        position: absolute;
+        content: '';
+        background-image: url('../images/star.svg');
+        height: 16px;
+        width: 16px;
+        top: 10px;
+        left: 8px;
+    }
+}
+
+h3 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+}
+
 // overflow scrollbar
 ::-webkit-scrollbar {
     width: 10px;
