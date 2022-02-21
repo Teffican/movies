@@ -1,0 +1,28 @@
+.header{
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    background-color: #121829;
+    z-index: 100;
+    &__inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 80px;
+    }
+    &__logo-link{
+        display: flex;
+        align-items: center;
+        min-height: 80px;
+    }
+    &__github{
+        position: relative;
+        padding-left: 30px;
+        &-icon{
+            fill: currentColor;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+}
