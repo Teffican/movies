@@ -6,7 +6,7 @@ class DetailsInfo extends Component {
         return (
             <div className='details__container'>
                 <div className="details__image-wrap">
-                    <img className="details__image" src={image}/>
+                    <img className="details__image" src={image} alt="title"/>
                 </div>
                 <div className="details__info">
                     <h4 className="details__info-title">

@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import logo from '../images/logo.svg'
 import '../styles/header.scss'
-import github from '../images/github-icon.svg'
 import { Link } from 'react-router-dom'
 
 class Header extends Component {
