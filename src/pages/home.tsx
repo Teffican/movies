@@ -4,12 +4,23 @@ import Categories from '../components/categories'
 import Search from '../components/search'
 
 class Home extends Component {
+    state = {
+        activeCategory: 'All'
+    }
+
+    changeCategory = (category: string) => {
+        this.setState({
+            ...this.state,
+            activeCategory: category
+        })
+    }
+
     render() {
         return (
             <div className='container'>
                 <Search />
-                <Categories />
-                <CardList />
+                <Categories changeCategory={this.changeCategory}/>
+                <CardList activeCategory={this.state.activeCategory}/>
             </div>
         )
     }

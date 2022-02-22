@@ -1,19 +1,22 @@
 import { Component } from 'react'
 import '../styles/categories.scss'
 
-class Categories extends Component {
+type CategoriesType = {
+    changeCategory: (category: string) => void
+}
+
+class Categories extends Component<CategoriesType> {
     state = {
-        activeCategory: 'All',
         categories: ['All', 'Movies', 'Tv Shows'],
         activeIndicatorStyle: {left: '8px'}
     }
 
-    changeCategory = (e: any) => {
+    handleClick = (e: any) => {
         this.setState({
             ...this.state,
-            activeCategory: e.target.innerText,
             activeIndicatorStyle: {left: e.target.offsetLeft}
         })
+        this.props.changeCategory(e.target.innerText)
     }
 
     render() {
@@ -23,7 +26,7 @@ class Categories extends Component {
                     <div 
                     className={`categories__item`} 
                     key={index} 
-                    onClick={this.changeCategory}
+                    onClick={this.handleClick}
                     >
                         {category}
                     </div>
