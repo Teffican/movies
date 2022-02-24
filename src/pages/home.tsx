@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import CardList from '../components/card-list'
+import CardList from '../components/card/list'
 import Categories from '../components/categories'
 import Search from '../components/search'
 
