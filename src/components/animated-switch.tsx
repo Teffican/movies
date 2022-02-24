@@ -20,7 +20,7 @@ const AnimatedSwitch = () => {
             >
                 <Routes key={location.key}>
                     <Route path='/' element={<Home />}/>
-                    <Route path='/details/id:id' element={<Details />}/>
+                    <Route path="/:type/id:id" element={<Details />}/>
                 </Routes>
             </CSSTransition>
         </TransitionGroup>

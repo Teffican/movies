@@ -1,56 +1,90 @@
 import React, { Component } from 'react'
-import image from '../../images/potter.jpg'
+import { connect } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { ProductType } from '../../types/product.type';
 
-class DetailsInfo extends Component {
+type DetailsInfoType = {
+    selectedProduct: ProductType,
+    productType: string,
+    isDetailsLoading: boolean
+}
+
+const mapStateToProps = (state: RootState) => ({
+    selectedProduct: state.products.selectedProduct,
+    isDetailsLoading: state.products.isDetailsLoading
+});
+
+class DetailsInfo extends Component<DetailsInfoType> {
     render() {
+        const {poster_path, name, title, tagline, overview, vote_average, 
+            release_date, runtime, genres, first_air_date, 
+            number_of_episodes, number_of_seasons} 
+        = this.props.selectedProduct
+        const {productType, isDetailsLoading} = this.props
+
+        const imgSrc = 'https://image.tmdb.org/t/p/w500/' + poster_path
+        const date = release_date ? release_date : first_air_date
+        const productTitle = title ? title : name
+
         return (
             <div className='details__container'>
                 <div className="details__image-wrap">
-                    <img className="details__image" src={image} alt="title"/>
+                    {isDetailsLoading
+                    ? <div className='details__image loader'></div>
+                    :  <img className="details__image" src={imgSrc} alt={productTitle}/>
+                    }
                 </div>
                 <div className="details__info">
                     <h4 className="details__info-title">
-                        Evil Must Be Confronted.
+                        {tagline}
                     </h4>
                     <div className="details__info-subtitle">
-                        The rebellion begins! Lord Voldemort has returned, 
-                        but the Ministry of Magic is doing everything it can 
-                        to keep the wizarding world from knowing the truth – 
-                        including appointing Ministry official Dolores Umbridge as the 
-                        new Defence Against the Dark Arts professor at Hogwarts. 
-                        When Umbridge refuses to teach practical defensive magic, 
-                        Ron and Hermione convince Harry to secretly train a select 
-                        group of students for the wizarding war that lies ahead. 
-                        A terrifying showdown between good and evil awaits in this 
-                        enthralling film version of the fifth novel in J.K. Rowling’s 
-                        Harry Potter series. Prepare for battle!
+                        {overview}
                     </div>
                     <div className="details__info-grade grade">
-                        6.8
+                        {vote_average}
                     </div>
                     <div className="details__info-type">
                         <div className="details__info-item-title">
                             Type
                         </div>
-                        Movie
+                        {productType === 'movie' ? 'Movie' : 'Tv Shows'}
                     </div>
                     <div className="details__info-date">
                         <div className="details__info-item-title">
                             Release date
                         </div>
-                        2007-06-28
+                        {date}
                     </div>
+                    {runtime &&
                     <div className="details__info-duration">
                         <div className="details__info-item-title">
                             Run time
                         </div>
-                        138 minutes
+                        {runtime} minutes
                     </div>
+                    }
+                    {number_of_seasons &&
+                    <div className="details__info-seasons">
+                        <div className="details__info-item-title">
+                            Seasons
+                        </div>
+                        {number_of_seasons}
+                    </div>}
+                    {number_of_episodes &&
+                    <div className="details__info-episodes">
+                        <div className="details__info-item-title">
+                            Episodes
+                        </div>
+                        {number_of_episodes}
+                    </div>}
                     <div className="details__info-genres">
                         <div className="details__info-item-title">
                             Genres
                         </div>
-                        Adventure  Fantasy  Mystery
+                        {genres?.map((genre, index) => (
+                            `${genre.name}${index + 1 !== genres?.length ? ', ' : ''}`
+                        ))}
                     </div>
                 </div>
             </div>
@@ -58,4 +92,4 @@ class DetailsInfo extends Component {
     }
 }
 
-export default DetailsInfo
+export default connect(mapStateToProps)(DetailsInfo)

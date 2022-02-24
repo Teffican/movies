@@ -5,12 +5,12 @@ import { ProductType } from '../../types/product.type'
 
 class CardItem extends Component<ProductType> {
     render() {
-        let {id, vote_average, poster_path, name, title} = this.props
+        let {id, vote_average, poster_path, name, title, media_type} = this.props
         const imgSrc = 'https://image.tmdb.org/t/p/w500/' + poster_path
         title = title ? title : name
 
         return (
-            <Link to={`details/id${id}`}>
+            <Link to={`${media_type}/id${id}`} state={'privet'}>
                 <div className='card-list__item'>
                     <div className="card-list__item-grade grade">
                         {vote_average}

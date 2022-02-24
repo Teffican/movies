@@ -7,13 +7,23 @@ const url = 'https://api.themoviedb.org'
 type InitialStateType = {
     initialList: ProductType[],
     filteredList: ProductType[],
-    isLoading: boolean
+    selectedProduct: ProductType,
+    isLoading: boolean,
+    isDetailsLoading: boolean
 } 
 
 const initialState: InitialStateType = {
     initialList: [],
     filteredList: [],
-    isLoading: false
+    isLoading: false,
+    isDetailsLoading: false,
+    selectedProduct: {
+        id: 0,
+        name: 'name',
+        title: 'title',
+        poster_path: '/',
+        vote_average: 0
+    }
 }
 
 export const fetchProducts = createAsyncThunk(
@@ -22,6 +32,16 @@ export const fetchProducts = createAsyncThunk(
         return fetch(`${url}/4/list/8192763?api_key=${api_key}`)
                 .then(res => res.json())
                 .then(data => data.results)
+    }
+)
+
+export const fetchProductDetails = createAsyncThunk(
+    'products/fetchProductDetails',
+    async (data: {id: number, type: string | undefined}) => {
+        const {type, id} = data
+        return fetch(`${url}/3/${type}/${id}?api_key=${api_key}`)
+                .then(res => res.json())
+                .then(data => data)
     }
 )
 
@@ -41,6 +61,17 @@ export const productsSlice = createSlice({
         })
         builder.addCase(fetchProducts.rejected, (state) => {
             state.isLoading = false
+        })
+
+        builder.addCase(fetchProductDetails.fulfilled, (state, action) => {
+            state.selectedProduct = action.payload
+            state.isDetailsLoading = false
+        })
+        builder.addCase(fetchProductDetails.pending, (state) => {
+            state.isDetailsLoading = true
+        })
+        builder.addCase(fetchProductDetails.rejected, (state) => {
+            state.isDetailsLoading = false
         })
     }
 })

@@ -10,7 +10,10 @@ export type ProductType = {
     release_date?: string,
     runtime?: number,
     genres?: [
-        id: number,
-        name?: string
-    ]
+        {id: number, name?: string}
+    ],
+    tagline?: string,
+    first_air_date?: string,
+    number_of_episodes?: number,
+    number_of_seasons?: number
 }
