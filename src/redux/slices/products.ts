@@ -49,7 +49,11 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        
+        filterProducts: (state, action) => {
+            state.filteredList = [...state.initialList].filter((product: ProductType) => (
+                product.media_type === action.payload
+            ))
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
@@ -76,6 +80,6 @@ export const productsSlice = createSlice({
     }
 })
 
-export const {  } = productsSlice.actions
+export const { filterProducts } = productsSlice.actions
 
 export default productsSlice.reducer
