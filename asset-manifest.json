@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/teffican.github.io/movies/static/css/main.fe4f8dc8.css",
+    "main.js": "/teffican.github.io/movies/static/js/main.3f8c4645.js",
+    "static/media/Background.png": "/teffican.github.io/movies/static/media/Background.9b982eea2477c7b1ecb9.png",
+    "index.html": "/teffican.github.io/movies/index.html",
+    "static/media/star.svg": "/teffican.github.io/movies/static/media/star.c25528ec2485d8ad8380.svg",
+    "static/media/logo.svg": "/teffican.github.io/movies/static/media/logo.b8130fa711cd42e7ad35c79db34e4416.svg",
+    "static/media/search.svg": "/teffican.github.io/movies/static/media/search.54ae83a4991dc462054d.svg",
+    "main.fe4f8dc8.css.map": "/teffican.github.io/movies/static/css/main.fe4f8dc8.css.map",
+    "main.3f8c4645.js.map": "/teffican.github.io/movies/static/js/main.3f8c4645.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fe4f8dc8.css",
+    "static/js/main.3f8c4645.js"
+  ]
+}
