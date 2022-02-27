@@ -2,21 +2,21 @@ import { Component } from 'react'
 import { connect } from 'react-redux';
 import { RootState } from '../redux/store';
 import '../styles/categories.scss'
-import { filterProducts } from '../redux/slices/products'
+import { filter } from '../redux/slices/products'
 
 type CategoriesType = {
-    changeCategory: (category: string) => void
-    filterProducts: (categoryValue: string) => void
+    changeCategory: (category:{title: string, value: string}) => void
+    filter: (categoryValue: string) => void
 }
 
 const mapStateToProps = (state: RootState) => ({
     initialProducts: state.products.initialList,
-    filteredProducts: state.products.filteredList,
+    currentProducts: state.products.currentList,
     isLoading: state.products.isLoading
 });
 
 const mapDispatchToProps = () => ({ 
-    filterProducts
+    filter
 });
 
 class Categories extends Component<CategoriesType> {
@@ -34,8 +34,8 @@ class Categories extends Component<CategoriesType> {
             ...this.state,
             activeIndicatorStyle: {left: e.target.offsetLeft}
         })
-        this.props.changeCategory(e.target.innerText)
-        this.props.filterProducts(e.target.dataset.value)
+        this.props.changeCategory({title: e.target.innerText, value: e.target.dataset.value})
+        this.props.filter(e.target.dataset.value)
     }
 
     render() {

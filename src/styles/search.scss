@@ -33,6 +33,9 @@
             &::placeholder{
                 color: inherit;
             }
+        }
+        &_with-text,
+        &:focus{
             & + .search__title{
                 top: 10px;
             }

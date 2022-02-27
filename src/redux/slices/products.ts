@@ -6,15 +6,15 @@ const url = 'https://api.themoviedb.org'
 
 type InitialStateType = {
     initialList: ProductType[],
-    filteredList: ProductType[],
+    currentList: ProductType[],
     selectedProduct: ProductType,
     isLoading: boolean,
-    isDetailsLoading: boolean
+    isDetailsLoading: boolean,
 } 
 
 const initialState: InitialStateType = {
     initialList: [],
-    filteredList: [],
+    currentList: [],
     isLoading: false,
     isDetailsLoading: false,
     selectedProduct: {
@@ -49,15 +49,24 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        filterProducts: (state, action) => {
-            state.filteredList = [...state.initialList].filter((product: ProductType) => (
+        filter: (state, action) => {
+            state.currentList = action.payload !== 'all'
+            ? [...state.initialList].filter((product: ProductType) => (
                 product.media_type === action.payload
+            ))
+            : [...state.initialList]
+        },
+        search: (state, action) => {
+            const regex = new RegExp(`(${action.payload})`, 'gi')
+            state.currentList = [...state.currentList].filter((product: ProductType) => (
+                product.title?.match(regex) || product.name?.match(regex)
             ))
         }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.initialList = action.payload
+            state.currentList = action.payload
             state.isLoading = false
         })
         builder.addCase(fetchProducts.pending, (state) => {
@@ -80,6 +89,6 @@ export const productsSlice = createSlice({
     }
 })
 
-export const { filterProducts } = productsSlice.actions
+export const { filter, search } = productsSlice.actions
 
 export default productsSlice.reducer

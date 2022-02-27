@@ -5,22 +5,22 @@ import Search from '../components/search'
 
 class Home extends Component {
     state = {
-        activeCategory: 'All'
+        activeCategory: {title: 'All', value: 'all'}
     }
 
-    changeCategory = (category: string) => {
+    changeCategory = (category: {title: string, value: string}) => {
         this.setState({
             ...this.state,
-            activeCategory: category
+            activeCategory: {title: category.title, value: category.value}
         })
     }
 
     render() {
         return (
             <div className='container'>
-                <Search />
+                <Search activeCategory={this.state.activeCategory.value}/>
                 <Categories changeCategory={this.changeCategory}/>
-                <CardList activeCategory={this.state.activeCategory}/>
+                <CardList activeCategory={this.state.activeCategory.title}/>
             </div>
         )
     }

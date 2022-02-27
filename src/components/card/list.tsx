@@ -9,14 +9,14 @@ import CardListEmpty from './list-empty'
 type CardListType = {
     activeCategory: string,
     initialProducts: ProductType[],
-    filteredProducts: ProductType[],
+    currentProducts: ProductType[],
     fetchProducts: () => void,
     isLoading: boolean
 }
 
 const mapStateToProps = (state: RootState) => ({
     initialProducts: state.products.initialList,
-    filteredProducts: state.products.filteredList,
+    currentProducts: state.products.currentList,
     isLoading: state.products.isLoading
 });
 
@@ -31,8 +31,8 @@ class CardList extends Component<CardListType> {
     }
 
     render() {
-        const {initialProducts, filteredProducts, activeCategory} = this.props
-        const cards = activeCategory === 'All' ? initialProducts : filteredProducts
+        const {currentProducts, activeCategory} = this.props
+        const cards = currentProducts
 
         return (
             <div className='card-list'>
