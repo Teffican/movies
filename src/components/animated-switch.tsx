@@ -19,10 +19,12 @@ const AnimatedSwitch = () => {
                 timeout={300}
             >
                 <Routes key={location.key}>
-                    <Route path='/' element={<Home />}/>
                     <Route path="/:type/id:id" element={<Details />}/>
                 </Routes>
             </CSSTransition>
+            <Routes>
+                <Route path='/' element={<Home />}/>
+            </Routes>
         </TransitionGroup>
     )
 }
